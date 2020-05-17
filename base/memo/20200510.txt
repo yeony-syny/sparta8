@@ -1,0 +1,115 @@
+자바스크립트 변수 선언
+
+let a = 1;
+a=2;
+console.log(a)
+2
+----------------
+값을 재할당해서
+2가 나옴
+
+a="김건희";
+console.log(a)
+김건희
+
+변수의 성격=자료형, 데이터의 형태: 문자를 넣을 수도 있음
+a="1" 
+1을 문자로 인식함. 문자형이됨"text"
+
+
+-------------------------------------------------------------
+let 변수 선언
+const b = 1;
+b = 2;
+에러남
+const로 선언한 변수는 해당 로직이 끝날때까지 변하지 않음
+---------------------------------------------------------------
+let 재할당 가능
+const 재할당 불가
+-----------------------------------------------------------
+let aa = 1;
+let bb = 2;
+console.log(aa+bb);
+3
+
+
+let aaa='김건희';
+let bbb= '스파';
+aaa+bbb=김건희 스파
+
+aaa+bb=김건희2
+문자+숫자는 항상 문자로 출력
+
+-----------------------------------------
+참거짓. 분기문
+
+let atrue=true
+let bfalse=false
+
+
+if(atrue== true){
+}else if(bfalse){
+}
+
+
+let check = 10>20;
+console.lof(check)
+
+let check2 = 10 == 10 ? "참" : "거짓";
+if(10 === 10){
+}else{
+}
+
+
+숫자형, 문자형, 참거짓형(true, false)
+리스트형, 딕셔너리형
+
+
+list[순서, 몇번째냐]
+dic["키"]
+
+
+모든 api는 리스트와 딕셔너리의 조합
+||
+&&
+
+묶어서 기억
+
+if
+else if
+else
+
+
+
+a=a+b  a+=b
+a=a*b  a*=b
+
+
+
+
+function add(num){
+    let a = 0;
+//반복문
+//변수에 값이 더해질것
+for(i=0 i<num+1; i++){
+//a=a+1;
+a+=i
+}
+return a;
+}
+console.log(add(10))
+
+
+
+for(i=0; i<fruit_list_length; i++){
+let count=0;
+if(fruit_list[i]=="딸기"){
+count +=
+}
+
+
+
+return a;}
+console.log(add(10)
+
+

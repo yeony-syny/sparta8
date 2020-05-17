@@ -1,0 +1,43 @@
+function q1(){
+   let input_q1 = $("#input-q1").val();
+   if (input_q1 == '') {
+       alert('입력하세요!');
+   } else {
+       alert(input_q1);
+   }
+}
+
+<!-- @ 기준으로 나뉨 split으로 나누면
+[info.s~~~ing, gmail.com] -->
+function q2() {
+    let q2_value=$("#input-q2").val();
+    let q1_list = q2_value.split('@);
+    colsole.log(q2_value.include("@"))
+    if(q2_value.includes("@")==true){
+        let q1_list = q2_value.split('@');
+        let q1_domain = q1_list[1].split(".")[0]
+    //[gmail, com]
+
+    }else{
+        alert("이메일을 올바르게 넣어주세요!"")
+
+    }
+
+
+
+    function q3() {
+        let input_q3 = $("#input-q3").val();
+        let temp_html = 'li'+<input_q3>+'/li'
+            .append temp_html
+
+
+
+
+    }
+
+1.
+$("#names-q3").empty();
+2.
+$("#names-q3").html('');
+<!-- .html은 자식태그를 조작할 수 있는 함수
+.html('') 은 자식태그를 공란으로 두겠다 라는 진행 -->
