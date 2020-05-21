@@ -21,10 +21,12 @@
         // 여기에 코드를 입력하세요
         $.ajax({
                 type:"get",
-                url:"https://cdn2.thecatapi.com/images/_np7TW9Iq.jpg",
+                url:"https://cdn2.thecatapi.com/images/search",
                 data:{},
                 success:function(response){
-                    let 
+                    // console.log(response[0]["url"])
+                    // $("#img-cat").attr()
+                    let imgurl = response
 
 
                     $("img-cat").attr("src","ddsd.jpg");

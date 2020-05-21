@@ -26,7 +26,24 @@
 
     <script>
 
-        $.ajax
+
+
+rentBikeStatus: {
+list_total_count: 99,
+RESULT: {
+CODE: "INFO-000",
+MESSAGE: "정상 처리되었습니다."
+},
+row: [
+{
+rackTotCnt: "22",
+stationName: "102. 망원역 1번출구 앞",
+parkingBikeTotCnt: "2",
+shared: "0",
+stationLatitude: "37.55564880",
+stationLongitude: "126.91062927",
+stationId: "ST-4"
+    
 
         function q1() {
             $('names-q1').empty();
@@ -35,6 +52,10 @@
                 url:"http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/bikeList/1/99](http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/bikeList/1/99)",
                 data:{},
                 success:function(reponse){
+                    let row = response["rentBikeStatus"]["row"];
+                    for (let i=0, i<rows.length; i++)
+
+                    let raack_cnt = rackTotCnt
 
 
 
