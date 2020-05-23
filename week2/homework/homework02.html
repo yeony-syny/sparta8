@@ -66,38 +66,53 @@
             } else {
                 alert('주문이 완료되었습니다!')
             }
-        }
-    </script>
+        };
+    </script>       
 
-
-
-
-    <!-- week2 환율스크립트 -->
     <script>
         $(document).ready(function(){
-	            alert('다 로딩됐다!')
+            alert('다 로딩됐다!')
+            $.ajax({
+                type: "GET",
+                url: "https://api.manana.kr/exchange/rate.json",
+                data: {},
+                success: function (response) {
+                    let KRW = response[1]["rate"]
 
-                $.ajax({
-                    type: "GET",
-                    url: "https://api.manana.kr/exchange/rate.json",
-                    data: {},
-                    success: function (response){                 
-                        let KRW = response[1]["rate"];
+                    // console.log(KRW)
 
-                        if (KRW < 1300 ){
-                            $('#currency').append('KRW') 
+                    let temp_html = `${KRW}`
+                    $('#currency').text(temp_html)
+                    
 
-                          } 
 
-                         console.log(KRW)
-                    }
                 }
-                )
-                
-        }
-      )
-        
+            })
+         });
+
+
     </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </head>
 
@@ -129,8 +144,7 @@
         <br>
         <!-- ★★★★★★★★week2:달러-원 환율:0000.00 -->
         <div class="dwexchange">
-            달러-원 환율 : <span class="currency"> </span>
-
+            달러-원 환율 : <span id="currency">     </span>
         </div>
         
         <br>
