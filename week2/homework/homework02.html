@@ -79,41 +79,15 @@
                 success: function (response) {
                     let KRW = response[1]["rate"]
 
-                    // console.log(KRW)
 
-                    let temp_html = `${KRW}`
-                    $('#currency').text(temp_html)
-                    
-
-
+                    $('#currency').text(KRW)
                 }
             })
          });
 
 
     </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 </head>
 
 
