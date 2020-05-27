@@ -7,3 +7,5 @@ db = client.dbsparta
 quiz = db.movies.find_one({'title':'매트릭스'})
 print(quiz['star'])
 
+same_names = list(db.movies,.find({'star':{'매트릭스'}},{'_id':False})
+print()
