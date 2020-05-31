@@ -12,16 +12,13 @@ soup = BeautifulSoup(data.text, 'html.parser')
 trs = soup.select('#body-content > div.newest-list > div > table > tbody > tr')
 
 for tr in trs:
-    a_tag = tr.select_one('td.info > a')
 
-        if a_tag is not None:
-            title = a_tag.select_one('td.info > a')text
+    title = tr.select_one('td.info > a.title.ellipsis').text.strip()
+    singer = tr.select_one('td.info > a.artist.ellipsis').text
+    rank = tr.select_one('td.number').text[0:2].strip()
 
-
+    print(rank, title, singer)
 
         
 
-
-        print(title)
-
-
+        

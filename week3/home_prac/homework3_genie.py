@@ -7,28 +7,6 @@ data = requests.get('https://www.genie.co.kr/chart/top200?ditc=D&ymd=20200403&hh
 
 soup = BeautifulSoup(data.text, 'html.parser')
 
-# <title>
-#body-content > div.newest-list > div > table > tbody > tr:nth-child(1) > td.info > a.title.ellipsis
-# <singer>
-#body-content > div.newest-list > div > table > tbody > tr:nth-child(1) > td.info > a.artist.ellipsis
-
-
-# <rank>
-#body-content > div.newest-list > div > table > tbody > tr:nth-child(1) > td.number
-
-# <td class="number">2
-#          <span class="rank">
-#               <span class="rank">
-#                   <span class="rank-up">2
-#                       <span class="hide">상승
-#                       </span>
-#                   </span>
-#               </span>
-#           </span>
-# </td>
-
-
-
 
 trs = soup.select('#body-content > div.newest-list > div > table > tbody > tr')
 
@@ -38,7 +16,7 @@ for tr in trs:
     singer = tr.select_one('td.info > a.artist.ellipsis')
     rank = tr.select_one('td.number')
 
-    if title is not None:
+    
         song = title.text.strip() 
         singers = singer.text.strip()
         ranks = rank.text.strip()
