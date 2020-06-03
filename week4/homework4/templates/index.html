@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>[팝니다] 고양이 꿀단지 숨숨집</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <!-- 구글 폰트 -->
+        <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+
+    <style>
+        .wrap{
+            margin: auto;
+            padding: 50px;
+            border-style: solid;
+            width: 600px;
+            font-family: 'Nanum Gothic Coding', monospace;
+        }      
+
+        h1{
+            font-weight: bolder;            
+        }
+        .dwexchange{
+            font-weight: bold;
+            color: blue;
+        }
+    </style>
+
+    <!-- week2 주문정보 빈칸 알림 -->
+    <script typy="text/JavaScript">
+
+        $(document).ready(function(){
+            // $('#orders-box').html('');
+            // alert('고양이 숨숨집 사러가기')
+            listing();
+            nowcurrency();            
+         });
+
+        function nowcurrency() {
+            $.ajax({
+                type: "GET",
+                url: "https://api.manana.kr/exchange/rate.json",
+                data: {},
+                success: function (response) {
+                    let KRW = response[1]["rate"]
+                    $('#currency').text(KRW)
+                }
+            })
+        }
+
+        function make_order() {
+            
+            let name = $('#customer_name').val();
+            let count = $('#customer_count').val();
+            let address = $('#customer_address').val();
+            let cellnumber = $('#customer_cellnumber').val();
+
+            // console.log(name, count, address, cellnumber)
+
+            if ( name == '' ) {
+                alert('이름을 입력해주세요!')
+                return false;
+            } 
+            if ( count == '' ){
+                alert('수량을 입력해주세요!')
+                return false;
+            }            
+            if ( address == '' ){
+                alert('주소를 입력해주세요!')
+                return false;
+            }            
+            if ( cellnumber == '' ){
+                alert('휴대폰 번호를 입력해주세요!')
+                return false;                
+            } 
+
+            $.ajax({
+                type: 'POST',
+                url: '/orders',
+                data: {
+                    name_give:name,
+                    count_give:count,
+                    address_give:address,
+                    cellnumber_give:cellnumber
+                },
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        alert(response['msg']);
+                        window.location.reload(); 
+                    }
+                }
+            });
+        };
+
+        function listing() {
+            $.ajax({
+                type: "GET",
+                url: "/orders",
+                data: {},
+                success: function (response) {
+                    if (response['result'] == 'success') {                        
+                        // console.log(response)
+                        let data = response['data'];
+
+                        for(let i = 0; i < data.length; i++){
+                            let name = data[i]['name'];
+                            let count = data[i]['count'];
+                            let address = data[i]['address'];
+                            let cellnumber = data[i]['cellnumber'];
+
+                            make_card(name, count, data, address, cellnumber)
+                        }                        
+                        
+                    } else {
+                        alert('주문을 받아오지 못했습니다');
+                    }
+                }
+            });
+        }
+
+         // 여기 해야함 주문박스 만들어서 템플릿 안에 들어가게 하기
+        function make_card(name, count, data, address, cellnumber){
+            
+            let temp = `<tr>
+                            <th scope="row">`+name+`</th>
+                            <td>`+count+`</td>
+                            <td>`+address+`</td>
+                            <td>`+cellnumber+`</td>
+                        </tr>`
+
+            $('#orders-box').append(temp)
+        }
+
+    </script>    
+</head>
+
+
+<body>
+    <div class="wrap">
+        <!-- 상품 사진  -->
+        <div class="cell_photo" style="text-align : center;">
+            <img src='http://ai.esmplus.com/petblo/house_cushion/PBS1034/PBS1034_15.jpg' width="400px" height="400px"/> 
+        </div>
+
+        <!-- 판매물품, 가격 -->
+        <div class="cell_name">
+            <br>
+            <h1>숨숨집 팝니다  <span style="font-size: 15px;">가격 : 30,000원 / 개</span>
+            </h1>
+        </div> 
+        
+        <!-- 상품설명 -->
+        <div class="cell_text">
+            <p>
+             사랑하는 우리집 고양이에서 꿀단지 숨숨집을 선물해주세요!
+             숨숨집을 세우거나 옆으로 눕혀서도 사용이 가능하며, 고양이 방석으로도 사용할 수 있습니다.
+             따뜻한 색감을 가진 귀여운 꿀단지 모양 디자인으로 집 안 어느 곳에 두어도 어울리며, 고품질의 섬유를 사용하여 고양이에게 푹신하고 안락한 쿠션감을 제공합니다.
+            </p>
+        </div>
+
+        <br>
+        <!-- ★★★★★★★★week2:달러-원 환율:0000.00 -->
+        <div class="dwexchange">
+            달러-원 환율 : <span id="currency">     </span>
+        </div>
+        
+        <br>
+
+        <!-- 주문하기 단락 -->
+        <div class="order_main" >
+            <h1>주문하기</h1>
+        </div>
+        
+        <!-- 주문입력란 -->
+        <div class="order_text">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">이름</span>
+                </div>
+                <input type="text" class="form-control" id="customer_name" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelect01">수량</label>
+                </div>
+                <select class="custom-select" id="customer_count">
+                  <option selected value>--구매하실 수량을 선택해주세요--</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">주소</span>
+                </div>
+                <input type="text" class="form-control" id="customer_address"   aria-label="address" aria-describedby="basic-addon1">
+            </div>
+            
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">전화번호</span>
+                </div>
+                <input type="text" class="form-control" id="customer_cellnumber" aria-label="callnumber" aria-describedby="basic-addon1">
+            </div>            
+        </div>
+
+        <!-- 버튼 -->
+        <div class="order_btn" style="text-align: center;">
+            <button onclick="make_order()" type="button" class="btn btn-outline-primary">주문하기</button>
+        </div>
+
+        <br>
+        <br>
+
+        <table class="table" >
+            <thead>
+              <tr>
+                <th scope="col">이름</th>
+                <th scope="col">수량</th>
+                <th scope="col">주소</th>
+                <th scope="col">전화번호</th>
+              </tr>
+            </thead>
+            <tbody id="orders-box">                           
+            </tbody>
+        </table>
+    </div>  
+
+</body>
+</html>
