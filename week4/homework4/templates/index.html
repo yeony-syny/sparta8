@@ -65,7 +65,7 @@
             })
         }
 
-        function make_order() {
+        function make_order() {                 // 3)   
             
             let name = $('#customer_name').val();
             let count = $('#customer_count').val();
@@ -90,7 +90,7 @@
                 alert('휴대폰 번호를 입력해주세요!')
                 return false;                
             } 
-
+                        //1)
             $.ajax({
                 type: 'POST',
                 url: '/orders',
@@ -109,7 +109,7 @@
             });
         };
 
-        function listing() {
+        function listing() { //4)
             $.ajax({
                 type: "GET",
                 url: "/orders",
@@ -125,7 +125,7 @@
                             let address = data[i]['address'];
                             let cellnumber = data[i]['cellnumber'];
 
-                            make_card(name, count, data, address, cellnumber)
+                            make_card(name, count, address, cellnumber)
                         }                        
                         
                     } else {
@@ -136,7 +136,8 @@
         }
 
          // 여기 해야함 주문박스 만들어서 템플릿 안에 들어가게 하기
-        function make_card(name, count, data, address, cellnumber){
+        //  6)
+        function make_card(name, count, address, cellnumber){
             
             let temp = `<tr>
                             <th scope="row">`+name+`</th>
