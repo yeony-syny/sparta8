@@ -38,7 +38,7 @@
         });
 
         function show_star() {
-            // $('#star-box').empty()
+            $('#star-box').empty()
 
             $.ajax({
                 type: 'GET',
@@ -104,8 +104,8 @@
                 success: function (response) {
                     if (response['result'] == 'success') {
                         let msg = response['msg'];
-                        alert(msg);
-                        window.location.reload();
+                        alert('좋아요 성공!');
+                        window.location.reload()
                     }
                 }
             });
@@ -115,11 +115,12 @@
             $.ajax({
                 type: 'POST',
                 url: '/api/delete',
-                data: {},
+                data: {name_give : name},
                 success: function (response) {
                     if (response['result'] == 'success') {
                         let msg = response['msg'];
-                        alert(msg);
+                        alert('삭제 성공!');
+                        window.location.reload()
                     }
                 }
             });
